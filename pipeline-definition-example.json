@@ -1,0 +1,14 @@
+{
+    "pipelineName": "YOUR_PIPELINE_NAME",
+    "defaultBuildImage": "arn:aws:ecr:AWS_REGION:AWS_ACCOUNT_NUMBER_FOR_IMAGE:repository/container-image",
+    "sourceRepo": "YOUR_GITHUB_REPO",
+    "accountId": "TARGET_AWS_ACCOUNT_NUMBER",
+    "codeStarConnectionArn": "arn:aws:codestar-connections:AWS_REGION:TARGET_AWS_ACCOUNT_NUMBER:connection/AWS_CODESTAR_CONNECTION_HASH",
+    "serviceRole": "arn:aws:iam::TARGET_AWS_ACCOUNT_NUMBER:role/service-role/aws-codestar-service-role",
+    "workflow": [
+      { "stageName": "build", "buildspec": "buildspec.yml", "outputName": "BuildOutput" },
+      { "stageName": "test", "buildspec": "buildspec-test.yml", "type": "test" },
+      { "stageName": "publish","buildspec": "buildspec-publish.yml", "outputName": "PublishOutput", "buildImageOverride": "arn:aws:ecr:eu-west-1:470820891875:repository/bbc-centos7-ci"},
+      { "stageName": "deploy", "buildspec": "buildspec-deploy.yml", "buildImageOverride": "arn:aws:ecr:eu-west-1:470820891875:repository/bbc-centos7-ci"}
+    ]
+  }
