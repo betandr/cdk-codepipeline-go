@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 FROM golang:1.17 AS builder
-WORKDIR /convoy
+WORKDIR /codepipeline
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o cdk-codepipeline-go .
 
@@ -23,6 +23,6 @@ RUN apk -v --no-cache --update add \
     update-ca-certificates && \
     npm install -g aws-cdk@${AWS_CDK_VERSION}
 WORKDIR /root/
-COPY --from=builder /convoy/cdk-codepipeline-go .
+COPY --from=builder /codepipeline/cdk-codepipeline-go .
 COPY cdk.json .
 ENTRYPOINT ["cdk"]
