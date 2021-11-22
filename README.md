@@ -16,8 +16,8 @@ Go runtime or tools. The pipeline itself is defined in a JSON file such as:
     "workflow": [
       { "stageName": "build", "buildspec": "buildspec.yml", "outputName": "BuildOutput" },
       { "stageName": "test", "buildspec": "buildspec-test.yml", "type": "test" },
-      { "stageName": "publish","buildspec": "buildspec-publish.yml", "outputName": "PublishOutput", "buildImageOverride": "arn:aws:ecr:eu-west-1:470820891875:repository/bbc-centos7-ci"},
-      { "stageName": "deploy", "buildspec": "buildspec-deploy.yml", "buildImageOverride": "arn:aws:ecr:eu-west-1:470820891875:repository/bbc-centos7-ci"}
+      { "stageName": "publish","buildspec": "buildspec-publish.yml", "outputName": "PublishOutput", "buildImageOverride": "arn:aws:ecr:eu-west-1:TARGET_AWS_ACCOUNT_NUMBER:repository/IMAGE_NAME"},
+      { "stageName": "deploy", "buildspec": "buildspec-deploy.yml", "buildImageOverride": "arn:aws:ecr:eu-west-1:TARGET_AWS_ACCOUNT_NUMBER:repository/IMAGE_NAME"}
     ]
   }
   ```
@@ -53,7 +53,7 @@ Credentials such as `AWS_ACCESS_KEY_ID` are environment variables.
 ### Synth
 ```
 docker run \
-  -v /Users/anderb08/workspace/cdk-codepipeline-go/:/var/ \
+  -v /PATH/TO/PIPELINE/DEFINITION/:/var/ \
   cdk-pipeline-go \
   synth -c pipeline-definition-file=/var/pipeline-definition.json
 ```
