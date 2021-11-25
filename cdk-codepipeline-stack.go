@@ -119,6 +119,7 @@ func NewConvoyPipelineStack(scope constructs.Construct, id string, props *Convoy
 				BuildSpec: awscodebuild.BuildSpec_FromSourceFilename(jsii.String(wf.Buildspec)),
 				Environment: &awscodebuild.BuildEnvironment{
 					BuildImage: buildImage,
+					Privileged: jsii.Bool(true),
 				},
 				Role: serviceRole,
 			},
