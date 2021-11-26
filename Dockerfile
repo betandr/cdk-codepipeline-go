@@ -9,16 +9,8 @@ ARG AWS_CDK_VERSION=1.133.0
 RUN apk -v --no-cache --update add \
         nodejs \
         npm \
-        python3 \
         ca-certificates \
-        groff \
-        less \
         bash \
-        make \
-        curl \
-        wget \
-        zip \
-        git \
         && \
     update-ca-certificates && \
     npm install -g aws-cdk@${AWS_CDK_VERSION}
